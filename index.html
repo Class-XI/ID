@@ -83,6 +83,7 @@
       flex-direction: column;
       justify-content: center;
       padding: 60px 20px 20px;
+      text-align: left; /* ✅ align text left */
     }
     .details p {
       margin: 8px 0;
@@ -125,14 +126,20 @@
       font-family: 'Times New Roman', serif;
     }
 
+    /* ✅ Mobile Responsive */
     @media (max-width: 600px) {
       .id-card {
-        flex-direction: column;
+        flex-direction: column;   /* stack on mobile */
         align-items: center;
         text-align: center;
       }
       .details {
-        padding: 70px 0 0;
+        padding: 70px 20px 20px;
+        text-align: center; /* center text on mobile */
+      }
+      .photo-container {
+        width: 100%;
+        padding: 10px 0 20px;
       }
     }
   </style>
@@ -149,7 +156,7 @@
   </div>
 
   <div id="cardDisplay"></div>
-  <button id="downloadBtn" onclick="downloadCard()" style="display:none">Download as A4</button>
+  <button id="downloadBtn" onclick="downloadCard()" style="display:none">Download</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
@@ -194,9 +201,10 @@
       // Proper A4 sizing & layout
       clone.style.width = "600px";
       clone.style.display = "flex";
-      clone.style.flexDirection = "row";
+      clone.style.flexDirection = "row";  // text left, photo right
       clone.style.justifyContent = "space-between";
       clone.style.margin = "40px 0";
+      clone.style.textAlign = "left"; // ✅ keep text aligned left
 
       const wrapper = document.createElement('div');
       wrapper.style.width = '794px';
@@ -211,7 +219,7 @@
       wrapper.style.textAlign = 'center';
 
       const heading = document.createElement('h1');
-      heading.innerText = 'KVD GITHUB TUTORIAL';
+      heading.innerText = 'ROYAL ID PROOF';
       heading.style.marginBottom = '20px';
       heading.style.color = '#2c3e50';
 
@@ -224,14 +232,14 @@
       const now = new Date();
       bottom.innerHTML = `<strong>Date:</strong> ${now.toLocaleDateString()} &nbsp;&nbsp; 
                           <strong>Time:</strong> ${now.toLocaleTimeString()}<br><br>
-                          <strong>Created by:</strong> Patel Deepak & Smit ✔`;
+                          <strong>Created by:</strong> Patel Deepak 🧊`;
       bottom.style.marginTop = '60px';
       bottom.style.fontSize = '14px';
       bottom.style.borderTop = '1px solid #ccc';
       bottom.style.paddingTop = '10px';
 
       const fakeStamp = document.createElement('div');
-      fakeStamp.innerText = 'FAKE';
+      fakeStamp.innerText = 'Original';
       fakeStamp.style.position = 'absolute';
       fakeStamp.style.bottom = '40px';
       fakeStamp.style.right = '40px';
