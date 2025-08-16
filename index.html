@@ -1,22 +1,24 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student ID Card Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    h1{
+    h1 {
       font-family: sans-serif;
       display: flex;
       justify-content: center;
+      margin-bottom: 20px;
     }
     body {
-      font-family: 'Merriweather', serif;
+      font-family: 'Roboto', sans-serif;
       background: linear-gradient(to right, #f0f0f0, #7062eb);
       display: flex;
       flex-direction: column;
@@ -47,64 +49,83 @@
       cursor: pointer;
       border: none;
     }
+
+    /* ID Card Styles */
     .id-card {
       display: flex;
       flex-direction: row;
-      background: white;
-      border: 3px solid #2c3e50;
-      border-radius: 16px;
-      padding: 30px 20px 20px;
+      background: #ffffff;
+      border: 2px solid #2c3e50;
+      border-radius: 12px;
       width: 100%;
       max-width: 500px;
       position: relative;
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-      justify-content: space-between;
+      overflow: hidden;
     }
-    .id-heading {
+    .id-header {
       position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: white;
-      padding: 4px 16px;
-      border: 2px solid gold;
-      color: goldenrod;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #2c3e50;
+      color: white;
       font-weight: bold;
-      border-radius: 8px;
-      font-size: 20px;
+      font-size: 18px;
+      text-align: center;
+      padding: 8px 0;
+    }
+    .logo {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      width: 40px;
+      height: 40px;
+      background: #ddd;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      color: #555;
     }
     .details {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-right: 20px;
+      padding: 60px 20px 20px;
     }
     .details p {
-      margin: 8px 0;
-      font-size: 16px;
+      margin: 6px 0;
+      font-size: 15px;
     }
     .photo-container {
-      flex: 1;
+      width: 160px;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 20px;
     }
     .photo {
-      width: 130px;
-      height: 130px;
-      border-radius: 65%;
+      width: 120px;
+      height: 150px;
+      border-radius: 8px;
       object-fit: cover;
       border: 2px solid #2c3e50;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .certified {
       color: green;
       font-weight: bold;
       margin-top: 10px;
+      font-size: 14px;
     }
     .certified::before {
-      content: "\2714 ";
+      content: "✔ ";
     }
+
     #downloadBtn {
       margin-top: 20px;
       padding: 12px 20px;
@@ -115,6 +136,7 @@
       border-radius: 8px;
       cursor: pointer;
     }
+
     @media (max-width: 600px) {
       .id-card {
         flex-direction: column;
@@ -122,7 +144,7 @@
         text-align: center;
       }
       .details {
-        padding: 20px 0 0;
+        padding: 70px 0 0;
       }
     }
   </style>
@@ -134,11 +156,15 @@
     <input type="text" id="class" placeholder="Enter Class">
     <input type="text" id="roll" placeholder="Enter Roll Number">
     <input type="text" id="phone" placeholder="Enter Phone Number">
-
     <input type="file" id="photo" accept="image/*">
     <button onclick="generateCard()">Generate ID Card</button>
-  </div>  <div id="cardDisplay"></div>
-  <button id="downloadBtn" onclick="downloadCard()" style="display:none">Download as A4</button>  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>  <script>
+  </div>
+
+  <div id="cardDisplay"></div>
+  <button id="downloadBtn" onclick="downloadCard()" style="display:none">Download as A4</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
     function generateCard() {
       const name = document.getElementById('name').value;
       const sclass = document.getElementById('class').value;
@@ -155,7 +181,8 @@
       reader.onload = function(e) {
         document.getElementById('cardDisplay').innerHTML = `
           <div class="id-card" id="idCard">
-            <div class="id-heading">Student ID Card</div>
+            <div class="id-header">KV BSF DANTIWADA</div>
+            <div class="logo">LOGO</div>
             <div class="details">
               <p><strong>Name:</strong> ${name}</p>
               <p><strong>Class:</strong> ${sclass}</p>
@@ -173,28 +200,26 @@
       reader.readAsDataURL(photo);
     }
 
-  function downloadCard() {
-  const idCard = document.getElementById("idCard");
-  const clone = idCard.cloneNode(true);
-  clone.style.border = '3px solid black';
-  clone.style.display = 'flex';
-  clone.style.flexDirection = 'row';   // ✅ side by side
-  clone.style.justifyContent = 'space-between';
-  clone.style.alignItems = 'center';
-  clone.style.textAlign = 'left';     // keep text aligned properly
+    function downloadCard() {
+      const idCard = document.getElementById("idCard");
+      const clone = idCard.cloneNode(true);
 
-  const wrapper = document.createElement('div');
-  wrapper.style.width = '794px';
-  wrapper.style.height = '1123px';
-  wrapper.style.padding = '40px';
-  wrapper.style.background = '#f3f3f3';
-  wrapper.style.fontFamily = 'Merriweather, serif';
-  wrapper.style.position = 'relative';
-  wrapper.style.display = 'flex';
-  wrapper.style.flexDirection = 'column'; // wrapper stays column
-  wrapper.style.alignItems = 'center';
-  wrapper.style.textAlign = 'center';
+      // Bigger card for A4
+      clone.style.transform = "scale(1.5)";
+      clone.style.transformOrigin = "top center";
+      clone.style.margin = "40px 0";
 
+      const wrapper = document.createElement('div');
+      wrapper.style.width = '794px';
+      wrapper.style.height = '1123px';
+      wrapper.style.padding = '40px';
+      wrapper.style.background = '#f3f3f3';
+      wrapper.style.fontFamily = 'Roboto, sans-serif';
+      wrapper.style.position = 'relative';
+      wrapper.style.display = 'flex';
+      wrapper.style.flexDirection = 'column';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.textAlign = 'center';
 
       const heading = document.createElement('h1');
       heading.innerText = 'KVD GITHUB TUTORIAL';
@@ -244,5 +269,6 @@
         document.body.removeChild(wrapper);
       });
     }
-  </script></body>
+  </script>
+</body>
 </html>
