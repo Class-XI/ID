@@ -64,18 +64,20 @@
       display: flex;
       flex-direction: column; /* header, body, footer */
     }
+    /* Old-style header */
     .id-header {
-      background: #2c3e50;
-      color: white;
+      background: #1b2a49;        /* dark navy */
+      color: #ffd700;            /* golden text */
       font-weight: bold;
-      font-size: 16px;
-      text-align: left;
-      padding: 6px 16px;
-      border-bottom-right-radius: 8px;
+      font-size: 18px;
+      text-align: center;
+      padding: 10px 0;
+      font-family: 'Times New Roman', serif;
+      border-bottom: 2px solid #ffd700;  /* underline */
     }
     .id-body {
       display: flex;
-      flex-direction: row;  /* ✅ force details left, photo right */
+      flex-direction: row;  /* ✅ keep row always */
       justify-content: space-between;
       align-items: flex-start;
       padding: 20px;
@@ -91,7 +93,7 @@
     }
     .photo-container {
       flex: 1;
-      min-width: 130px;  /* ✅ reserve space */
+      min-width: 130px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -129,15 +131,18 @@
       font-family: 'Times New Roman', serif;
     }
 
-    /* ✅ Mobile Responsive */
+    /* ✅ On mobile, keep photo still on right */
     @media (max-width: 600px) {
       .id-body {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        flex-direction: row;  /* no stacking */
+        gap: 10px;
       }
-      .details {
-        margin-bottom: 15px;
+      .details p {
+        font-size: 14px;
+      }
+      .photo {
+        width: 90px;
+        height: 120px;
       }
     }
   </style>
@@ -215,7 +220,7 @@
       wrapper.style.textAlign = 'center';
 
       const heading = document.createElement('h1');
-      heading.innerText = 'Royal ID Card';
+      heading.innerText = 'ROYAL ID CARD';
       heading.style.marginBottom = '20px';
       heading.style.color = '#2c3e50';
 
