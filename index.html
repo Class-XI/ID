@@ -173,22 +173,28 @@
       reader.readAsDataURL(photo);
     }
 
-    function downloadCard() {
-      const idCard = document.getElementById("idCard");
-      const clone = idCard.cloneNode(true);
-      clone.style.border = '3px solid black';
+  function downloadCard() {
+  const idCard = document.getElementById("idCard");
+  const clone = idCard.cloneNode(true);
+  clone.style.border = '3px solid black';
+  clone.style.display = 'flex';
+  clone.style.flexDirection = 'row';   // ✅ side by side
+  clone.style.justifyContent = 'space-between';
+  clone.style.alignItems = 'center';
+  clone.style.textAlign = 'left';     // keep text aligned properly
 
-      const wrapper = document.createElement('div');
-      wrapper.style.width = '794px';
-      wrapper.style.height = '1123px';
-      wrapper.style.padding = '40px';
-      wrapper.style.background = '#f3f3f3';
-      wrapper.style.fontFamily = 'Merriweather, serif';
-      wrapper.style.position = 'relative';
-      wrapper.style.display = 'flex';
-      wrapper.style.flexDirection = 'column';
-      wrapper.style.alignItems = 'center';
-      wrapper.style.textAlign = 'center';
+  const wrapper = document.createElement('div');
+  wrapper.style.width = '794px';
+  wrapper.style.height = '1123px';
+  wrapper.style.padding = '40px';
+  wrapper.style.background = '#f3f3f3';
+  wrapper.style.fontFamily = 'Merriweather, serif';
+  wrapper.style.position = 'relative';
+  wrapper.style.display = 'flex';
+  wrapper.style.flexDirection = 'column'; // wrapper stays column
+  wrapper.style.alignItems = 'center';
+  wrapper.style.textAlign = 'center';
+
 
       const heading = document.createElement('h1');
       heading.innerText = 'KVD GITHUB TUTORIAL';
