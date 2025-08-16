@@ -52,8 +52,6 @@
 
     /* ID Card Styles */
     .id-card {
-      display: flex;
-      flex-direction: row;
       background: #ffffff;
       border: 2px solid #2c3e50;
       border-radius: 8px;
@@ -63,12 +61,10 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
       overflow: hidden;
       font-family: 'Times New Roman', serif;
-      flex-wrap: wrap;
+      display: flex;
+      flex-direction: column; /* column for header, body, footer */
     }
     .id-header {
-      position: absolute;
-      top: 0;
-      left: 0;
       background: #2c3e50;
       color: white;
       font-weight: bold;
@@ -78,12 +74,15 @@
       border-bottom-right-radius: 8px;
       font-family: 'Times New Roman', serif;
     }
+    .id-body {
+      display: flex;
+      flex-direction: row; /* ✅ text left, photo right */
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+    }
     .details {
       flex: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 60px 20px 50px;
       text-align: left;
     }
     .details p {
@@ -95,7 +94,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
     }
     .photo {
       width: 110px;
@@ -106,7 +104,6 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .certified-footer {
-      width: 100%;
       text-align: center;
       background: #f7f7f7;
       padding: 6px;
@@ -133,18 +130,12 @@
 
     /* ✅ Mobile Responsive */
     @media (max-width: 600px) {
-      .id-card {
+      .id-body {
         flex-direction: column;
-        align-items: center;
         text-align: center;
       }
       .details {
-        padding: 70px 20px 20px;
-        text-align: center;
-      }
-      .photo-container {
-        width: 100%;
-        padding: 10px 0 20px;
+        margin-bottom: 15px;
       }
     }
   </style>
@@ -182,14 +173,16 @@
         document.getElementById('cardDisplay').innerHTML = `
           <div class="id-card" id="idCard">
             <div class="id-header">KV BSF DANTIWADA</div>
-            <div class="details">
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Class:</strong> ${sclass}</p>
-              <p><strong>Roll No:</strong> ${roll}</p>
-              <p><strong>Phone No:</strong> ${phone}</p>
-            </div>
-            <div class="photo-container">
-              <img class="photo" src="${e.target.result}" alt="Photo">
+            <div class="id-body">
+              <div class="details">
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Class:</strong> ${sclass}</p>
+                <p><strong>Roll No:</strong> ${roll}</p>
+                <p><strong>Phone No:</strong> ${phone}</p>
+              </div>
+              <div class="photo-container">
+                <img class="photo" src="${e.target.result}" alt="Photo">
+              </div>
             </div>
             <div class="certified-footer">Certified By KVD Coders</div>
           </div>
@@ -204,9 +197,8 @@
       const clone = idCard.cloneNode(true);
 
       // Smaller card for A4
-      clone.style.width = "450px";
+      clone.style.width = "420px";
       clone.style.margin = "40px 0";
-      clone.style.textAlign = "left";
 
       const wrapper = document.createElement('div');
       wrapper.style.width = '794px';
@@ -221,7 +213,7 @@
       wrapper.style.textAlign = 'center';
 
       const heading = document.createElement('h1');
-      heading.innerText = 'KVD GITHUB TUTORIAL';
+      heading.innerText = 'Royal ID Card';
       heading.style.marginBottom = '20px';
       heading.style.color = '#2c3e50';
 
@@ -234,14 +226,14 @@
       const now = new Date();
       bottom.innerHTML = `<strong>Date:</strong> ${now.toLocaleDateString()} &nbsp;&nbsp; 
                           <strong>Time:</strong> ${now.toLocaleTimeString()}<br><br>
-                          <strong>Created by:</strong> Patel Deepak & Smit ✔`;
+                          <strong>Created by:</strong> Patel Deepak 🧊`;
       bottom.style.marginTop = '60px';
       bottom.style.fontSize = '14px';
       bottom.style.borderTop = '1px solid #ccc';
       bottom.style.paddingTop = '10px';
 
       const fakeStamp = document.createElement('div');
-      fakeStamp.innerText = 'FAKE';
+      fakeStamp.innerText = 'Limited';
       fakeStamp.style.position = 'absolute';
       fakeStamp.style.bottom = '40px';
       fakeStamp.style.right = '40px';
