@@ -200,75 +200,78 @@
       reader.readAsDataURL(photo);
     }
 
-    function downloadCard() {
-      const idCard = document.getElementById("idCard");
-      const clone = idCard.cloneNode(true);
+function downloadCard() {
+  const idCard = document.getElementById("idCard");
+  const clone = idCard.cloneNode(true);
 
-      // Bigger card for A4
-      clone.style.transform = "scale(1.5)";
-      clone.style.transformOrigin = "top center";
-      clone.style.margin = "40px 0";
+  // Proper scaling for A4
+  clone.style.width = "600px";   // fixed larger width
+  clone.style.margin = "40px 0"; // spacing top & bottom
+  clone.style.transform = "none"; // remove scale distortion
 
-      const wrapper = document.createElement('div');
-      wrapper.style.width = '794px';
-      wrapper.style.height = '1123px';
-      wrapper.style.padding = '40px';
-      wrapper.style.background = '#f3f3f3';
-      wrapper.style.fontFamily = 'Roboto, sans-serif';
-      wrapper.style.position = 'relative';
-      wrapper.style.display = 'flex';
-      wrapper.style.flexDirection = 'column';
-      wrapper.style.alignItems = 'center';
-      wrapper.style.textAlign = 'center';
+  const wrapper = document.createElement('div');
+  wrapper.style.width = '794px';
+  wrapper.style.height = '1123px';
+  wrapper.style.padding = '40px';
+  wrapper.style.background = '#f3f3f3';
+  wrapper.style.fontFamily = 'Roboto, sans-serif';
+  wrapper.style.position = 'relative';
+  wrapper.style.display = 'flex';
+  wrapper.style.flexDirection = 'column';
+  wrapper.style.alignItems = 'center';
+  wrapper.style.textAlign = 'center';
 
-      const heading = document.createElement('h1');
-      heading.innerText = 'KVD GITHUB TUTORIAL';
-      heading.style.marginBottom = '20px';
-      heading.style.color = '#2c3e50';
+  const heading = document.createElement('h1');
+  heading.innerText = 'KVD GITHUB TUTORIAL';
+  heading.style.marginBottom = '20px';
+  heading.style.color = '#2c3e50';
 
-      const para = document.createElement('p');
-      para.innerText = 'THIS ID IS GENERATED FOR JUST EXPERIMENTAL PURPOSE, IT HAS NO VALID USE IN REAL LIFE AND IT IS FAKE ✔';
-      para.style.marginBottom = '40px';
-      para.style.maxWidth = '600px';
+  const para = document.createElement('p');
+  para.innerText = 'THIS ID IS GENERATED FOR JUST EXPERIMENTAL PURPOSE, IT HAS NO VALID USE IN REAL LIFE AND IT IS FAKE ✔';
+  para.style.marginBottom = '40px';
+  para.style.maxWidth = '600px';
 
-      const bottom = document.createElement('p');
-      const now = new Date();
-      bottom.innerHTML = `<strong>Date:</strong> ${now.toLocaleDateString()} &nbsp;&nbsp; <strong>Time:</strong> ${now.toLocaleTimeString()}<br><br><strong>Created by:</strong> Patel Deepak & Smit ✔`;
-      bottom.style.marginTop = '60px';
-      bottom.style.fontSize = '14px';
-      bottom.style.borderTop = '1px solid #ccc';
-      bottom.style.paddingTop = '10px';
+  const bottom = document.createElement('p');
+  const now = new Date();
+  bottom.innerHTML = `<strong>Date:</strong> ${now.toLocaleDateString()} &nbsp;&nbsp; 
+                      <strong>Time:</strong> ${now.toLocaleTimeString()}<br><br>
+                      <strong>Created by:</strong> Patel Deepak & Smit ✔`;
+  bottom.style.marginTop = '60px';
+  bottom.style.fontSize = '14px';
+  bottom.style.borderTop = '1px solid #ccc';
+  bottom.style.paddingTop = '10px';
 
-      const fakeStamp = document.createElement('div');
-      fakeStamp.innerText = 'FAKE';
-      fakeStamp.style.position = 'absolute';
-      fakeStamp.style.bottom = '40px';
-      fakeStamp.style.right = '40px';
-      fakeStamp.style.fontSize = '80px';
-      fakeStamp.style.fontWeight = 'bold';
-      fakeStamp.style.color = 'rgba(200,0,0,0.6)';
-      fakeStamp.style.border = '3px solid red';
-      fakeStamp.style.padding = '20px';
-      fakeStamp.style.borderRadius = '50%';
-      fakeStamp.style.transform = 'rotate(-25deg)';
-      fakeStamp.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
+  const fakeStamp = document.createElement('div');
+  fakeStamp.innerText = 'FAKE';
+  fakeStamp.style.position = 'absolute';
+  fakeStamp.style.bottom = '40px';
+  fakeStamp.style.right = '40px';
+  fakeStamp.style.fontSize = '80px';
+  fakeStamp.style.fontWeight = 'bold';
+  fakeStamp.style.color = 'rgba(200,0,0,0.6)';
+  fakeStamp.style.border = '3px solid red';
+  fakeStamp.style.padding = '20px';
+  fakeStamp.style.borderRadius = '50%';
+  fakeStamp.style.transform = 'rotate(-25deg)';
+  fakeStamp.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
 
-      wrapper.appendChild(heading);
-      wrapper.appendChild(para);
-      wrapper.appendChild(clone);
-      wrapper.appendChild(bottom);
-      wrapper.appendChild(fakeStamp);
+  wrapper.appendChild(heading);
+  wrapper.appendChild(para);
+  wrapper.appendChild(clone);
+  wrapper.appendChild(bottom);
+  wrapper.appendChild(fakeStamp);
 
-      document.body.appendChild(wrapper);
+  document.body.appendChild(wrapper);
 
-      html2canvas(wrapper).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'A4_Student_ID.png';
-        link.href = canvas.toDataURL();
-        link.click();
-        document.body.removeChild(wrapper);
-      });
-    }
+  html2canvas(wrapper).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'A4_Student_ID.png';
+    link.href = canvas.toDataURL();
+    link.click();
+    document.body.removeChild(wrapper);
+  });
+}
+
   </script>
 </body>
 </html>
