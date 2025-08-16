@@ -53,7 +53,7 @@
     /* ID Card Styles */
     .id-card {
       display: flex;
-      flex-direction: row; /* text left, photo right */
+      flex-direction: row;
       background: #ffffff;
       border: 2px solid #2c3e50;
       border-radius: 8px;
@@ -63,6 +63,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
       overflow: hidden;
       font-family: 'Times New Roman', serif;
+      flex-wrap: wrap;
     }
     .id-header {
       position: absolute;
@@ -78,39 +79,43 @@
       font-family: 'Times New Roman', serif;
     }
     .details {
-      flex: 1;
+      flex: 2;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 60px 20px 20px;
-      text-align: left; /* ✅ align text left */
+      padding: 60px 20px 50px;
+      text-align: left;
     }
     .details p {
       margin: 8px 0;
       font-size: 16px;
     }
     .photo-container {
-      width: 160px;
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
     }
     .photo {
-      width: 120px;
-      height: 150px;
+      width: 110px;
+      height: 140px;
       border-radius: 6px;
       object-fit: cover;
       border: 2px solid #2c3e50;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    .certified {
-      color: green;
-      font-weight: bold;
-      margin-top: 10px;
+    .certified-footer {
+      width: 100%;
+      text-align: center;
+      background: #f7f7f7;
+      padding: 6px;
       font-size: 14px;
+      font-weight: bold;
+      color: green;
+      border-top: 1px solid #ccc;
     }
-    .certified::before {
+    .certified-footer::before {
       content: "✔ ";
     }
 
@@ -129,13 +134,13 @@
     /* ✅ Mobile Responsive */
     @media (max-width: 600px) {
       .id-card {
-        flex-direction: column;   /* stack on mobile */
+        flex-direction: column;
         align-items: center;
         text-align: center;
       }
       .details {
         padding: 70px 20px 20px;
-        text-align: center; /* center text on mobile */
+        text-align: center;
       }
       .photo-container {
         width: 100%;
@@ -156,7 +161,7 @@
   </div>
 
   <div id="cardDisplay"></div>
-  <button id="downloadBtn" onclick="downloadCard()" style="display:none">Download</button>
+  <button id="downloadBtn" onclick="downloadCard()" style="display:none">Download as A4</button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
@@ -182,11 +187,11 @@
               <p><strong>Class:</strong> ${sclass}</p>
               <p><strong>Roll No:</strong> ${roll}</p>
               <p><strong>Phone No:</strong> ${phone}</p>
-              <p class="certified">Certified By KVD Coders</p>
             </div>
             <div class="photo-container">
               <img class="photo" src="${e.target.result}" alt="Photo">
             </div>
+            <div class="certified-footer">Certified By KVD Coders</div>
           </div>
         `;
         document.getElementById('downloadBtn').style.display = 'inline-block';
@@ -198,13 +203,10 @@
       const idCard = document.getElementById("idCard");
       const clone = idCard.cloneNode(true);
 
-      // Proper A4 sizing & layout
-      clone.style.width = "600px";
-      clone.style.display = "flex";
-      clone.style.flexDirection = "row";  // text left, photo right
-      clone.style.justifyContent = "space-between";
+      // Smaller card for A4
+      clone.style.width = "450px";
       clone.style.margin = "40px 0";
-      clone.style.textAlign = "left"; // ✅ keep text aligned left
+      clone.style.textAlign = "left";
 
       const wrapper = document.createElement('div');
       wrapper.style.width = '794px';
@@ -219,7 +221,7 @@
       wrapper.style.textAlign = 'center';
 
       const heading = document.createElement('h1');
-      heading.innerText = 'ROYAL ID PROOF';
+      heading.innerText = 'KVD GITHUB TUTORIAL';
       heading.style.marginBottom = '20px';
       heading.style.color = '#2c3e50';
 
@@ -232,14 +234,14 @@
       const now = new Date();
       bottom.innerHTML = `<strong>Date:</strong> ${now.toLocaleDateString()} &nbsp;&nbsp; 
                           <strong>Time:</strong> ${now.toLocaleTimeString()}<br><br>
-                          <strong>Created by:</strong> Patel Deepak 🧊`;
+                          <strong>Created by:</strong> Patel Deepak & Smit ✔`;
       bottom.style.marginTop = '60px';
       bottom.style.fontSize = '14px';
       bottom.style.borderTop = '1px solid #ccc';
       bottom.style.paddingTop = '10px';
 
       const fakeStamp = document.createElement('div');
-      fakeStamp.innerText = 'Original';
+      fakeStamp.innerText = 'FAKE';
       fakeStamp.style.position = 'absolute';
       fakeStamp.style.bottom = '40px';
       fakeStamp.style.right = '40px';
