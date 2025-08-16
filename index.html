@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student ID Card Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -18,7 +17,7 @@
       margin-bottom: 20px;
     }
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Times New Roman', serif;
       background: linear-gradient(to right, #f0f0f0, #7062eb);
       display: flex;
       flex-direction: column;
@@ -41,6 +40,7 @@
       font-size: 16px;
       border-radius: 8px;
       border: 1px solid #ccc;
+      font-family: 'Times New Roman', serif;
     }
     .form-container button {
       background: #2980b9;
@@ -53,42 +53,29 @@
     /* ID Card Styles */
     .id-card {
       display: flex;
-      flex-direction: row;
+      flex-direction: row; /* text left, photo right */
       background: #ffffff;
       border: 2px solid #2c3e50;
-      border-radius: 12px;
+      border-radius: 8px;
       width: 100%;
       max-width: 500px;
       position: relative;
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
       overflow: hidden;
+      font-family: 'Times New Roman', serif;
     }
     .id-header {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
       background: #2c3e50;
       color: white;
       font-weight: bold;
-      font-size: 18px;
-      text-align: center;
-      padding: 8px 0;
-    }
-    .logo {
-      position: absolute;
-      top: 8px;
-      left: 12px;
-      width: 40px;
-      height: 40px;
-      background: #ddd;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: bold;
-      color: #555;
+      font-size: 16px;
+      text-align: left;
+      padding: 6px 16px;
+      border-bottom-right-radius: 8px;
+      font-family: 'Times New Roman', serif;
     }
     .details {
       flex: 1;
@@ -98,8 +85,8 @@
       padding: 60px 20px 20px;
     }
     .details p {
-      margin: 6px 0;
-      font-size: 15px;
+      margin: 8px 0;
+      font-size: 16px;
     }
     .photo-container {
       width: 160px;
@@ -111,7 +98,7 @@
     .photo {
       width: 120px;
       height: 150px;
-      border-radius: 8px;
+      border-radius: 6px;
       object-fit: cover;
       border: 2px solid #2c3e50;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
@@ -135,6 +122,7 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      font-family: 'Times New Roman', serif;
     }
 
     @media (max-width: 600px) {
@@ -182,7 +170,6 @@
         document.getElementById('cardDisplay').innerHTML = `
           <div class="id-card" id="idCard">
             <div class="id-header">KV BSF DANTIWADA</div>
-            <div class="logo">LOGO</div>
             <div class="details">
               <p><strong>Name:</strong> ${name}</p>
               <p><strong>Class:</strong> ${sclass}</p>
@@ -200,78 +187,79 @@
       reader.readAsDataURL(photo);
     }
 
-function downloadCard() {
-  const idCard = document.getElementById("idCard");
-  const clone = idCard.cloneNode(true);
+    function downloadCard() {
+      const idCard = document.getElementById("idCard");
+      const clone = idCard.cloneNode(true);
 
-  // Proper scaling for A4
-  clone.style.width = "600px";   // fixed larger width
-  clone.style.margin = "40px 0"; // spacing top & bottom
-  clone.style.transform = "none"; // remove scale distortion
+      // Proper A4 sizing & layout
+      clone.style.width = "600px";
+      clone.style.display = "flex";
+      clone.style.flexDirection = "row";
+      clone.style.justifyContent = "space-between";
+      clone.style.margin = "40px 0";
 
-  const wrapper = document.createElement('div');
-  wrapper.style.width = '794px';
-  wrapper.style.height = '1123px';
-  wrapper.style.padding = '40px';
-  wrapper.style.background = '#f3f3f3';
-  wrapper.style.fontFamily = 'Roboto, sans-serif';
-  wrapper.style.position = 'relative';
-  wrapper.style.display = 'flex';
-  wrapper.style.flexDirection = 'column';
-  wrapper.style.alignItems = 'center';
-  wrapper.style.textAlign = 'center';
+      const wrapper = document.createElement('div');
+      wrapper.style.width = '794px';
+      wrapper.style.height = '1123px';
+      wrapper.style.padding = '40px';
+      wrapper.style.background = '#f3f3f3';
+      wrapper.style.fontFamily = 'Times New Roman, serif';
+      wrapper.style.position = 'relative';
+      wrapper.style.display = 'flex';
+      wrapper.style.flexDirection = 'column';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.textAlign = 'center';
 
-  const heading = document.createElement('h1');
-  heading.innerText = 'KVD GITHUB TUTORIAL';
-  heading.style.marginBottom = '20px';
-  heading.style.color = '#2c3e50';
+      const heading = document.createElement('h1');
+      heading.innerText = 'KVD GITHUB TUTORIAL';
+      heading.style.marginBottom = '20px';
+      heading.style.color = '#2c3e50';
 
-  const para = document.createElement('p');
-  para.innerText = 'THIS ID IS GENERATED FOR JUST EXPERIMENTAL PURPOSE, IT HAS NO VALID USE IN REAL LIFE AND IT IS FAKE ✔';
-  para.style.marginBottom = '40px';
-  para.style.maxWidth = '600px';
+      const para = document.createElement('p');
+      para.innerText = 'THIS ID IS GENERATED FOR JUST EXPERIMENTAL PURPOSE, IT HAS NO VALID USE IN REAL LIFE AND IT IS FAKE ✔';
+      para.style.marginBottom = '40px';
+      para.style.maxWidth = '600px';
 
-  const bottom = document.createElement('p');
-  const now = new Date();
-  bottom.innerHTML = `<strong>Date:</strong> ${now.toLocaleDateString()} &nbsp;&nbsp; 
-                      <strong>Time:</strong> ${now.toLocaleTimeString()}<br><br>
-                      <strong>Created by:</strong> Patel Deepak & Smit ✔`;
-  bottom.style.marginTop = '60px';
-  bottom.style.fontSize = '14px';
-  bottom.style.borderTop = '1px solid #ccc';
-  bottom.style.paddingTop = '10px';
+      const bottom = document.createElement('p');
+      const now = new Date();
+      bottom.innerHTML = `<strong>Date:</strong> ${now.toLocaleDateString()} &nbsp;&nbsp; 
+                          <strong>Time:</strong> ${now.toLocaleTimeString()}<br><br>
+                          <strong>Created by:</strong> Patel Deepak & Smit ✔`;
+      bottom.style.marginTop = '60px';
+      bottom.style.fontSize = '14px';
+      bottom.style.borderTop = '1px solid #ccc';
+      bottom.style.paddingTop = '10px';
 
-  const fakeStamp = document.createElement('div');
-  fakeStamp.innerText = 'FAKE';
-  fakeStamp.style.position = 'absolute';
-  fakeStamp.style.bottom = '40px';
-  fakeStamp.style.right = '40px';
-  fakeStamp.style.fontSize = '80px';
-  fakeStamp.style.fontWeight = 'bold';
-  fakeStamp.style.color = 'rgba(200,0,0,0.6)';
-  fakeStamp.style.border = '3px solid red';
-  fakeStamp.style.padding = '20px';
-  fakeStamp.style.borderRadius = '50%';
-  fakeStamp.style.transform = 'rotate(-25deg)';
-  fakeStamp.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
+      const fakeStamp = document.createElement('div');
+      fakeStamp.innerText = 'FAKE';
+      fakeStamp.style.position = 'absolute';
+      fakeStamp.style.bottom = '40px';
+      fakeStamp.style.right = '40px';
+      fakeStamp.style.fontSize = '80px';
+      fakeStamp.style.fontWeight = 'bold';
+      fakeStamp.style.color = 'rgba(200,0,0,0.6)';
+      fakeStamp.style.border = '3px solid red';
+      fakeStamp.style.padding = '20px';
+      fakeStamp.style.borderRadius = '50%';
+      fakeStamp.style.transform = 'rotate(-25deg)';
+      fakeStamp.style.boxShadow = '0 0 10px rgba(0,0,0,0.2)';
 
-  wrapper.appendChild(heading);
-  wrapper.appendChild(para);
-  wrapper.appendChild(clone);
-  wrapper.appendChild(bottom);
-  wrapper.appendChild(fakeStamp);
+      wrapper.appendChild(heading);
+      wrapper.appendChild(para);
+      wrapper.appendChild(clone);
+      wrapper.appendChild(bottom);
+      wrapper.appendChild(fakeStamp);
 
-  document.body.appendChild(wrapper);
+      document.body.appendChild(wrapper);
 
-  html2canvas(wrapper).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'A4_Student_ID.png';
-    link.href = canvas.toDataURL();
-    link.click();
-    document.body.removeChild(wrapper);
-  });
-}
-
+      html2canvas(wrapper).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'A4_Student_ID.png';
+        link.href = canvas.toDataURL();
+        link.click();
+        document.body.removeChild(wrapper);
+      });
+    }
   </script>
 </body>
 </html>
